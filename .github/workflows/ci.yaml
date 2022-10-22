@@ -26,3 +26,4 @@ jobs:
         env:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
           NODE_ENV: ${{ secrets.NODE_ENV}}
+          PORT: ${{ secrets.PORT }}
