@@ -42,57 +42,6 @@ describe("Contacts", function (done) {
     });
   });
 
-  // Test the /POST route
-  describe("POST /", () => {
-    // Test to create a contact
-    it("should create a new contact", function (done) {
-      this.timeout(10000);
-      const contact = {
-        name: "Johnny Doe",
-        email: "John@email.com",
-        phoneNumber: "555-555-5555",
-      };
-      chai
-        .request(app)
-        .post("/api/contacts")
-        .send(contact)
-        .end((err, res) => {
-          res.should.have.status(201);
-          res.body.should.be.a("object");
-          done();
-        });
-    });
-  });
-  // Test the /PUT route
-  describe("PUT /", () => {
-    // Test to update a contact
-    it("should update a contact's phone number", function (done) {
-      this.timeout(10000);
-      const contact = new Contact({
-        name: "John Doe",
-        email: "John@email.com",
-        phoneNumber: "555-555-5555",
-      });
-      contact.save((err, contact) => {
-        chai
-          .request(app)
-          .put("/api/contacts")
-          .send({
-            name: "John Doe",
-            email: "John@email.com",
-            phoneNumber: "555-555-5556",
-          })
-          .end((err, res) => {
-            res.should.have.status(200);
-            res.body.should.be.a("object");
-            res.body.should.have
-              .property("message")
-              .eql("Updated contact number to 555-555-5556 successfully!");
-            done();
-          });
-      });
-    });
-  });
   // Test to create existing contact
   // it("should fail to create an existing contact", function (done) {
   //   this.timeout(2000);
@@ -161,6 +110,75 @@ describe("Contacts", function (done) {
               .property("message")
               .eql("Deleted contact successfully!");
             res.body.should.have.property("name").eql(contact.name);
+            done();
+          });
+      });
+    });
+  });
+});
+
+describe("Contacts", function (done) {
+  beforeEach((done) => {
+    // Before each test we empty the database
+    Contact.deleteOne({}, (err) => {
+      done();
+    });
+  });
+  // Test the /POST route
+  describe("POST /", () => {
+    // Test to create a contact
+    it("should create a new contact", function (done) {
+      this.timeout(5000);
+      const contact = {
+        name: "Johnny Doe",
+        email: "John@email.com",
+        phoneNumber: "555-555-5555",
+      };
+      chai
+        .request(app)
+        .post("/api/contacts")
+        .send(contact)
+        .end((err, res) => {
+          res.should.have.status(201);
+          res.body.should.be.a("object");
+          done();
+        });
+    });
+  });
+});
+
+describe("Contacts", function (done) {
+  beforeEach((done) => {
+    // Before each test we empty the database
+    Contact.deleteOne({}, (err) => {
+      done();
+    });
+  });
+  // Test the /PUT route
+  describe("PUT /", () => {
+    // Test to update a contact
+    it("should update a contact's phone number", function (done) {
+      this.timeout(10000);
+      const contact = new Contact({
+        name: "John Doe",
+        email: "John@email.com",
+        phoneNumber: "555-555-5555",
+      });
+      contact.save((err, contact) => {
+        chai
+          .request(app)
+          .put("/api/contacts")
+          .send({
+            name: "John Doe",
+            email: "John@email.com",
+            phoneNumber: "555-555-5556",
+          })
+          .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a("object");
+            res.body.should.have
+              .property("message")
+              .eql("Updated contact number to 555-555-5556 successfully!");
             done();
           });
       });
