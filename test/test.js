@@ -149,6 +149,7 @@ describe("Contacts", function (done) {
 });
 
 describe("Contacts", function (done) {
+  this.timeout(5000);
   beforeEach((done) => {
     // Before each test we empty the database
     Contact.deleteOne({}, (err) => {
@@ -159,7 +160,7 @@ describe("Contacts", function (done) {
   describe("PUT /", () => {
     // Test to update a contact
     it("should update a contact's phone number", function (done) {
-      this.timeout(10000);
+      this.timeout(5000);
       const contact = new Contact({
         name: "John Doe",
         email: "John@email.com",
