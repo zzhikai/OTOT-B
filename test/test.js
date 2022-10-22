@@ -45,7 +45,8 @@ describe("Contacts", function (done) {
   // Test the /POST route
   describe("POST /", () => {
     // Test to create a contact
-    it("should create a new contact", (done) => {
+    it("should create a new contact", function (done) {
+      this.timeout(10000);
       const contact = {
         name: "Johnny Doe",
         email: "John@email.com",
@@ -62,7 +63,8 @@ describe("Contacts", function (done) {
         });
     });
     // Test to create existing contact
-    it("should fail to create an existing contact", (done) => {
+    it("should fail to create an existing contact", function (done) {
+      this.timeout(10000);
       const contact = new Contact({
         name: "John Doe",
         email: "John@email.com",
@@ -85,7 +87,8 @@ describe("Contacts", function (done) {
     // Test the /PUT route
     describe("PUT /", () => {
       // Test to update a contact
-      it("should update a contact's phone number", (done) => {
+      it("should update a contact's phone number", function (done) {
+        this.timeout(10000);
         const contact = new Contact({
           name: "John Doe",
           email: "John@email.com",
@@ -115,7 +118,8 @@ describe("Contacts", function (done) {
     // Test the /DELETE route
     describe("DELETE /", () => {
       // Test to delete a contact
-      it("should delete a contact", (done) => {
+      it("should delete a contact", function (done) {
+        this.timeout(10000);
         const contact = new Contact({
           name: "John Doe",
           email: "John@email.com",
