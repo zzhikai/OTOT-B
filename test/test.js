@@ -14,8 +14,8 @@ if (process.env.NODE_ENV != "test") {
 } else {
   console.log("NODE_ENV is set to: ", process.env.NODE_ENV);
 }
-describe("Contacts", (suite) => {
-  suite.enableTimeouts(false);
+describe("Contacts", function (done) {
+  this.enableTimeouts(false);
   beforeEach((done) => {
     // Before each test we empty the database
     Contact.deleteOne({}, (err) => {
