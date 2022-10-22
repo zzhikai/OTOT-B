@@ -116,6 +116,31 @@ describe("Contacts", function (done) {
   //   });
   // });
 
+  // Test to delete non existent contact
+  // it("Should indicate contact not exist", function (done) {
+  //   this.timeout(5000);
+  //   const id = "63545b4e486381e53eb6c7f1";
+  //   chai
+  //     .request(app)
+  //     .delete("/api/contacts/" + id)
+  //     .end((err, res) => {
+  //       res.should.have.status(404);
+  //       res.body.should.be.a("object");
+  //       res.body.should.have
+  //         .property("message")
+  //         .eql("Contact does not exist");
+  //       done();
+  //     });
+  // });
+});
+
+describe("Contacts", function (done) {
+  beforeEach((done) => {
+    // Before each test we empty the database
+    Contact.deleteOne({}, (err) => {
+      done();
+    });
+  });
   // Test the /DELETE route
   describe("DELETE /", () => {
     // Test to delete a contact
@@ -141,21 +166,4 @@ describe("Contacts", function (done) {
       });
     });
   });
-
-  // Test to delete non existent contact
-  // it("Should indicate contact not exist", function (done) {
-  //   this.timeout(5000);
-  //   const id = "63545b4e486381e53eb6c7f1";
-  //   chai
-  //     .request(app)
-  //     .delete("/api/contacts/" + id)
-  //     .end((err, res) => {
-  //       res.should.have.status(404);
-  //       res.body.should.be.a("object");
-  //       res.body.should.have
-  //         .property("message")
-  //         .eql("Contact does not exist");
-  //       done();
-  //     });
-  // });
 });
