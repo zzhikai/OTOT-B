@@ -87,11 +87,9 @@ export async function updateContactNumber(req, res) {
         return res.status(400).json({message: "Could not update contact!"});
       } else {
         console.log(`Updated contact ${name} successfully!`);
-        return res
-          .status(200)
-          .json({
-            message: `Updated contact number to ${phoneNumber} successfully!`,
-          });
+        return res.status(200).json({
+          message: `Updated contact number to ${phoneNumber} successfully!`,
+        });
       }
     } else {
       return res
@@ -108,23 +106,29 @@ export async function updateContactNumber(req, res) {
 
 export async function deleteContact(req, res) {
   try {
-    const {id} = req.params.id;
-    const contactExists = await _findContactId(id);
+    const {contact_id} = req.params;
+    // const {id} = req.params.contact_id;
+    console.log("id for deleteContact :", contact_id);
+    const contactExists = await _findContactId(contact_id);
+    console.log(contactExists);
     if (!contactExists) {
       return res.status(400).json({
         status: "error",
         message: "Contact does not exist",
       });
     }
-    const resp = await _deleteContact(id);
+    const resp = await _deleteContact(contact_id);
     console.log(resp);
     if (resp.err) {
       return res.status(400).json({message: "Could not delete contact!"});
     } else {
       console.log(`Deleted contact ${resp} successfully!`);
-      return res
-        .status(200)
-        .json({message: `Deleted contact ${id} successfully!`});
+      return res.status(200).json({
+        message: `Deleted contact successfully!`,
+        name: resp.name,
+        email: resp.email,
+        phoneNumber: resp.phoneNumber,
+      });
     }
   } catch (err) {
     console.log(err);

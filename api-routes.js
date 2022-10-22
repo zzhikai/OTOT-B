@@ -26,12 +26,12 @@ router.get("/admin", (req, res) => {
 
 // Contact API /api/contact
 // Contact routes
-const contactRoutes = router.route("/contacts");
-// contactRoutes.get((req, res) => {
-//   res.send("Hello World from contacts api!");
-// });
-contactRoutes.post(createContact);
-contactRoutes.get(getContacts);
-contactRoutes.put(updateContactNumber);
-router.route("/contacts/:id").delete(deleteContact);
+router.route("/contacts/:contact_id").delete(deleteContact);
+
+router
+  .route("/contacts")
+  .post(createContact)
+  .get(getContacts)
+  .put(updateContactNumber);
+
 export default router;
