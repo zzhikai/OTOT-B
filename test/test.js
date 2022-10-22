@@ -46,7 +46,7 @@ describe("Contacts", function (done) {
   describe("POST /", () => {
     // Test to create a contact
     it("should create a new contact", function (done) {
-      this.timeout(10000);
+      this.timeout(1000);
       const contact = {
         name: "Johnny Doe",
         email: "John@email.com",
@@ -64,7 +64,7 @@ describe("Contacts", function (done) {
     });
     // Test to create existing contact
     it("should fail to create an existing contact", function (done) {
-      this.timeout(10000);
+      this.timeout(1000);
       const contact = new Contact({
         name: "John Doe",
         email: "John@email.com",
