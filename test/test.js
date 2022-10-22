@@ -120,7 +120,7 @@ describe("Contacts", function (done) {
     describe("DELETE /", () => {
       // Test to delete a contact
       it("should delete a contact", function (done) {
-        this.timeout(5000);
+        this.timeout(10000);
         const contact = new Contact({
           name: "John Doe",
           email: "John@email.com",
