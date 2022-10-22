@@ -46,7 +46,7 @@ describe("Contacts", function (done) {
   describe("POST /", () => {
     // Test to create a contact
     it("should create a new contact", function (done) {
-      this.timeout(4000);
+      this.timeout(10000);
       const contact = {
         name: "Johnny Doe",
         email: "John@email.com",
@@ -67,7 +67,7 @@ describe("Contacts", function (done) {
   describe("PUT /", () => {
     // Test to update a contact
     it("should update a contact's phone number", function (done) {
-      this.timeout(5000);
+      this.timeout(10000);
       const contact = new Contact({
         name: "John Doe",
         email: "John@email.com",
