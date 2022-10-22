@@ -9,7 +9,6 @@ import {
 } from "../model/contact-orm.js";
 
 export async function createContact(req, res) {
-  console.log(req.body);
   try {
     const {name, email, phoneNumber} = req.body;
     if (
@@ -41,7 +40,6 @@ export async function createContact(req, res) {
           .status(400)
           .json({message: "Could not create a new contact!"});
       } else {
-        console.log(`Created new contact ${name} successfully!`);
         return res
           .status(201)
           .json({message: `Created new contact ${name} successfully!`});
@@ -52,7 +50,6 @@ export async function createContact(req, res) {
         .json({message: "Required information are are missing!"});
     }
   } catch (err) {
-    console.log(err);
     return res
       .status(500)
       .json({message: "Database failure when creating new contact!"});
@@ -68,7 +65,6 @@ export async function getContacts(req, res) {
       return res.status(200).json(resp);
     }
   } catch (err) {
-    console.log(err);
     return res
       .status(500)
       .json({message: "Database failure when getting contacts!"});
@@ -104,14 +100,12 @@ export async function updateContactNumber(req, res) {
       if (resp.err) {
         return res.status(400).json({message: "Could not update contact!"});
       } else {
-        console.log(`Updated contact ${name} successfully!`);
         return res.status(200).json({
           message: `Updated contact number to ${phoneNumber} successfully!`,
         });
       }
     }
   } catch (err) {
-    console.log(err);
     return res
       .status(500)
       .json({message: "Database failure when updating contact!"});
@@ -127,9 +121,7 @@ export async function deleteContact(req, res) {
         .status(400)
         .json({message: "Required information are are missing!"});
     }
-    console.log("id for deleteContact :", contact_id);
     const contactExists = await _findContactId(contact_id);
-    console.log(contactExists);
     if (!contactExists) {
       return res.status(404).json({
         status: "error",
@@ -140,7 +132,6 @@ export async function deleteContact(req, res) {
     if (resp.err) {
       return res.status(400).json({message: "Could not delete contact!"});
     } else {
-      console.log(`Deleted contact ${resp} successfully!`);
       return res.status(200).json({
         message: `Deleted contact successfully!`,
         name: resp.name,
@@ -149,7 +140,6 @@ export async function deleteContact(req, res) {
       });
     }
   } catch (err) {
-    // console.log(err);
     return res
       .status(500)
       .json({message: "Database failure when deleting contact!"});

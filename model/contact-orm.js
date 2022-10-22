@@ -58,7 +58,6 @@ export async function ormUpdateContactNumber(name, email, phoneNumber) {
 
 export async function ormFindContactId(id) {
   try {
-    console.log("id for findContactId :", id);
     return await findContactId(id);
   } catch (error) {
     return {error};
