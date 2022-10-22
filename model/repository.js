@@ -59,6 +59,6 @@ export async function deleteContact(params) {
     _id: id,
   };
   const deletedContact = ContactModel.findOneAndDelete(filter);
-  console.log(deletedContact);
+  // console.log(deletedContact);
   return deletedContact;
 }
