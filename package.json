@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "mocha --timeout 60000 test --exit"
+    "test": "mocha --timeout 80000 test --exit"
   },
   "author": "",
   "license": "ISC",
