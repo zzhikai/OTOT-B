@@ -3,9 +3,9 @@ import mongoose from "mongoose";
 import ContactModel from "./contact-model.js";
 const port = process.env.PORT;
 const mongoDB = process.env.MONGODB_URI;
-
+const dbName = process.env.NODE_ENV === "test" ? "testApiDB" : "apiDB";
 mongoose.connect(mongoDB, {
-  dbname: "apiDB",
+  dbname: dbName,
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

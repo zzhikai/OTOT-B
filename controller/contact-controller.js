@@ -89,7 +89,9 @@ export async function updateContactNumber(req, res) {
         console.log(`Updated contact ${name} successfully!`);
         return res
           .status(200)
-          .json({message: `Updated contact ${name} successfully!`});
+          .json({
+            message: `Updated contact number to ${phoneNumber} successfully!`,
+          });
       }
     } else {
       return res
