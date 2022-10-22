@@ -23,26 +23,26 @@ describe("Contacts", () => {
   });
 
   // Test the /GET route
-  describe("GET /", () => {
-    // Test to get all contacts
-    it("should get all contacts", (done) => {
-      const contact = new Contact({
-        name: "John Doe",
-        email: "John@email.com",
-        phoneNumber: "555-555-5555",
-      });
-      contact.save((err, contact) => {
-        chai
-          .request(app)
-          .get("/api/contacts")
-          .end((err, res) => {
-            res.should.have.status(200);
-            res.body.should.be.a("array");
-            done();
-          });
-      });
-    });
-  });
+  // describe("GET /", () => {
+  //   // Test to get all contacts
+  //   it("should get all contacts", (done) => {
+  //     const contact = new Contact({
+  //       name: "John Doe",
+  //       email: "John@email.com",
+  //       phoneNumber: "555-555-5555",
+  //     });
+  //     contact.save((err, contact) => {
+  //       chai
+  //         .request(app)
+  //         .get("/api/contacts")
+  //         .end((err, res) => {
+  //           res.should.have.status(200);
+  //           res.body.should.be.a("array");
+  //           done();
+  //         });
+  //     });
+  //   });
+  // });
 
   // Test the /POST route
   describe("POST /", () => {
