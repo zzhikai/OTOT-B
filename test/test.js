@@ -88,7 +88,7 @@ describe("Contacts", function (done) {
     describe("PUT /", () => {
       // Test to update a contact
       it("should update a contact's phone number", function (done) {
-        this.timeout(10000);
+        this.timeout(5000);
         const contact = new Contact({
           name: "John Doe",
           email: "John@email.com",
