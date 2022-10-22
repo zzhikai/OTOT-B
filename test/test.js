@@ -118,6 +118,7 @@ describe("Contacts", function (done) {
 });
 
 describe("Contacts", function (done) {
+  this.timeout(5000);
   beforeEach((done) => {
     // Before each test we empty the database
     Contact.deleteOne({}, (err) => {
