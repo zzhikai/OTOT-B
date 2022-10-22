@@ -13,7 +13,7 @@ if (process.env.NODE_ENV != "test") {
   console.log("NODE_ENV is set to: ", process.env.NODE_ENV);
 }
 describe("Contacts", function (done) {
-  this.timeout(50000);
+  this.enableTimeouts(false);
   beforeEach((done) => {
     // Before each test we empty the database
     Contact.deleteOne({}, (err) => {
@@ -120,7 +120,7 @@ describe("Contacts", function (done) {
     describe("DELETE /", () => {
       // Test to delete a contact
       it("should delete a contact", function (done) {
-        this.timeout(10000);
+        this.enableTimeouts(false);
         const contact = new Contact({
           name: "John Doe",
           email: "John@email.com",
