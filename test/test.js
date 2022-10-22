@@ -8,8 +8,6 @@ process.env.NODE_ENV = "test";
 chai.use(chaiHttp);
 chai.should();
 if (process.env.NODE_ENV != "test") {
-  console.log("NODE_ENV is not set to test");
-  console.log("NODE_ENV is set to: ", process.env.NODE_ENV);
   process.exit(1);
 } else {
   console.log("NODE_ENV is set to: ", process.env.NODE_ENV);
@@ -124,7 +122,6 @@ describe("Contacts", function (done) {
           phoneNumber: "555-555-5555",
         });
         contact.save((err, contact) => {
-          console.log(contact);
           chai
             .request(app)
             .delete("/api/contacts/" + contact._id)
