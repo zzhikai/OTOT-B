@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  continuous-integration:
     runs-on: ubuntu-latest
 
     strategy:
@@ -26,7 +26,14 @@ jobs:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
           NODE_ENV: ${{ secrets.NODE_ENV}}
           PORT: ${{ secrets.PORT }}
-      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+  continuous-deployment:
+    needs: continous-integration
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+      - name: Deploy to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "peaceful-retreat-65590" #Must be unique in Heroku
