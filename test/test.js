@@ -179,7 +179,7 @@ describe("Contacts", function (done) {
             res.body.should.be.a("object");
             res.body.should.have
               .property("message")
-              .eql("Updated contact number to 555-555-5556 successfully!");
+              .eql("Updated contact number successfully!");
             done();
           });
       });
