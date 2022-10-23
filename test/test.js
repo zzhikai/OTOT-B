@@ -94,6 +94,7 @@ describe("Contacts", function (done) {
   describe("DELETE /", () => {
     // Test to delete a contact
     it("should delete a contact", function (done) {
+      this.timeout(5000);
       const contact = new Contact({
         name: "John Doe",
         email: "John@email.com",
@@ -118,7 +119,6 @@ describe("Contacts", function (done) {
 });
 
 describe("Contacts", function (done) {
-  this.timeout(5000);
   beforeEach((done) => {
     // Before each test we empty the database
     Contact.deleteOne({}, (err) => {
@@ -149,7 +149,6 @@ describe("Contacts", function (done) {
 });
 
 describe("Contacts", function (done) {
-  this.timeout(5000);
   beforeEach((done) => {
     // Before each test we empty the database
     Contact.deleteOne({}, (err) => {

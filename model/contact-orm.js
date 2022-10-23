@@ -30,12 +30,11 @@ export async function ormGetContacts() {
   }
 }
 
-export async function ormFindContact(name, email, phoneNumber) {
+export async function ormFindContact(name, email) {
   try {
     return await findContact({
       name,
       email,
-      phoneNumber,
     });
   } catch (error) {
     return {error};

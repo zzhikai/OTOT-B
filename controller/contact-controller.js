@@ -10,7 +10,13 @@ import {
 
 export async function createContact(req, res) {
   try {
+    if (Object.keys(req.body).length === 0) {
+      return res
+        .status(400)
+        .json({message: "Required information are missing!"});
+    }
     const {name, email, phoneNumber} = req.body;
+
     if (
       phoneNumber.trim().length === 0 ||
       name.trim().length === 0 ||
@@ -18,7 +24,7 @@ export async function createContact(req, res) {
     ) {
       return res
         .status(400)
-        .json({message: "Required information are are missing!"});
+        .json({message: "Required information are missing!"});
     }
     const contactExists = await _findContact(name, email, phoneNumber);
 
@@ -28,11 +34,7 @@ export async function createContact(req, res) {
         message: "Contact already exists",
       });
     }
-    if (!req.body) {
-      return res
-        .status(400)
-        .json({message: "Required information are are missing!"});
-    }
+
     if (name && email && phoneNumber) {
       const resp = await _createContact(name, email, phoneNumber);
       if (resp.err) {
@@ -47,7 +49,7 @@ export async function createContact(req, res) {
     } else {
       return res
         .status(400)
-        .json({message: "Required information are are missing!"});
+        .json({message: "Required information are missing!"});
     }
   } catch (err) {
     return res
@@ -73,6 +75,11 @@ export async function getContacts(req, res) {
 
 export async function updateContactNumber(req, res) {
   try {
+    if (Object.keys(req.body).length === 0) {
+      return res
+        .status(400)
+        .json({message: "Required information are missing!"});
+    }
     const {name, email, phoneNumber} = req.body;
     if (
       phoneNumber.trim().length === 0 ||
@@ -81,27 +88,30 @@ export async function updateContactNumber(req, res) {
     ) {
       return res
         .status(400)
-        .json({message: "Required information are are missing!"});
-    }
-    if (!req.body) {
-      return res
-        .status(400)
-        .json({message: "Required information are are missing!"});
+        .json({message: "Required information are missing!"});
     }
     if (name && email && phoneNumber) {
-      const contactExists = await _findContact(name, email, phoneNumber);
-      if (contactExists) {
+      const contactExists = await _findContact(name, email);
+      if (!contactExists) {
+        return res.status(404).json({
+          status: "error",
+          message: "Contact does not exist",
+        });
+      }
+      if (contactExists.phoneNumber === phoneNumber) {
         return res.status(400).json({
           status: "error",
           message: "Cannot update contact with same information",
         });
-      }
-      const resp = await _updateContactNumber(name, email, phoneNumber);
-      if (resp.err) {
-        return res.status(400).json({message: "Could not update contact!"});
       } else {
+        const resp = await _updateContactNumber(name, email, phoneNumber);
+        if (resp.err) {
+          return res
+            .status(400)
+            .json({message: "No such contact exits for this name and email"});
+        }
         return res.status(200).json({
-          message: `Updated contact number to ${phoneNumber} successfully!`,
+          message: `Updated contact number successfully!`,
         });
       }
     }
@@ -119,7 +129,7 @@ export async function deleteContact(req, res) {
     if (!mongoose.isValidObjectId(contact_id)) {
       return res
         .status(400)
-        .json({message: "Required information are are missing!"});
+        .json({message: "Required information are missing!"});
     }
     const contactExists = await _findContactId(contact_id);
     if (!contactExists) {
