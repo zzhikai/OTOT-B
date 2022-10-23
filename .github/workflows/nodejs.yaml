@@ -22,13 +22,13 @@ jobs:
       - run: npm ci
       - run: npm run build --if-present
       - run: npm test
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          NODE_ENV: ${{ secrets.NODE_ENV}}
+          PORT: ${{ secrets.PORT }}
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "peaceful-retreat-65590" #Must be unique in Heroku
           heroku_email: "zhangzhikai71@gmail.com"
           procfile: "web: npm start"
-        env:
-          MONGODB_URI: ${{ secrets.MONGODB_URI }}
-          NODE_ENV: ${{ secrets.NODE_ENV}}
-          PORT: ${{ secrets.PORT }}
