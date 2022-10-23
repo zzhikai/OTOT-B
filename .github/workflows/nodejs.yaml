@@ -27,7 +27,7 @@ jobs:
           NODE_ENV: ${{ secrets.NODE_ENV}}
           PORT: ${{ secrets.PORT }}
   continuous-deployment:
-    needs: continous-integration
+    needs: continuous-integration
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
