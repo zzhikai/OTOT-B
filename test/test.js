@@ -13,6 +13,8 @@ if (process.env.NODE_ENV != "test") {
   console.log("NODE_ENV is set to: ", process.env.NODE_ENV);
 }
 describe("Contacts", function (done) {
+  this.timeout(5000);
+
   beforeEach((done) => {
     // Before each test we empty the database
     Contact.deleteOne({}, (err) => {
@@ -84,6 +86,7 @@ describe("Contacts", function (done) {
 });
 
 describe("Contacts", function (done) {
+  this.timeout(5000);
   beforeEach((done) => {
     // Before each test we empty the database
     Contact.deleteOne({}, (err) => {
@@ -94,7 +97,7 @@ describe("Contacts", function (done) {
   describe("DELETE /", () => {
     // Test to delete a contact
     it("should delete a contact", function (done) {
-      this.timeout(5000);
+      // this.timeout(5000);
       const contact = new Contact({
         name: "John Doe",
         email: "John@email.com",
@@ -119,6 +122,7 @@ describe("Contacts", function (done) {
 });
 
 describe("Contacts", function (done) {
+  this.timeout(5000);
   beforeEach((done) => {
     // Before each test we empty the database
     Contact.deleteOne({}, (err) => {
@@ -129,7 +133,7 @@ describe("Contacts", function (done) {
   describe("POST /", () => {
     // Test to create a contact
     it("should create a new contact", function (done) {
-      this.timeout(5000);
+      //
       const contact = {
         name: "Johnny Doe",
         email: "John@email.com",
@@ -149,6 +153,7 @@ describe("Contacts", function (done) {
 });
 
 describe("Contacts", function (done) {
+  this.timeout(5000);
   beforeEach((done) => {
     // Before each test we empty the database
     Contact.deleteOne({}, (err) => {
@@ -159,7 +164,7 @@ describe("Contacts", function (done) {
   describe("PUT /", () => {
     // Test to update a contact
     it("should update a contact's phone number", function (done) {
-      this.timeout(5000);
+      // this.timeout(5000);
       const contact = new Contact({
         name: "John Doe",
         email: "John@email.com",
